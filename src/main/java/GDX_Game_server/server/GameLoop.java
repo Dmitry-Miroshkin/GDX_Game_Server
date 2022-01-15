@@ -1,5 +1,6 @@
-package GDX_Game_server.server.ws;
+package GDX_Game_server.server;
 
+import GDX_Game_server.server.ws.WebSocketHandler;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Array;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class GameLoop extends ApplicationAdapter {
     public void create() {
         socketHandler.setConnectListener(session -> events.add(session.getId() + " just joined"));
         socketHandler.setDisconnectListener(session -> events.add(session.getId() + " disconnected"));
-        socketHandler.setMessageListener((session, message) -> events.add(session.getId(), message));
+        socketHandler.setMessageListener((session, message) -> events.add(session.getId()+ " said " + message, message));
     }
 
     @Override

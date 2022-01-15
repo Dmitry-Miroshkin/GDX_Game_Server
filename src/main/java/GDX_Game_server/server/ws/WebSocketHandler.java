@@ -17,23 +17,24 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
     private MessageListener messageListener;
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
         sessions.add(session);
         connectListener.handle(session);
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) {
         messageListener.handle(session, message.getPayload());
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         sessions.removeValue(session, true);
         disconnectListener.handle(session);
     }
 
     public void setConnectListener(ConnectListener connectListener) {
+
         this.connectListener = connectListener;
     }
 

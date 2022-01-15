@@ -17,6 +17,6 @@ private final WebSocketHandler webSocketHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-registry.addHandler(webSocketHandler, "/ws").setAllowedOrigins("*");
+       registry.addHandler(webSocketHandler, "/ws").setAllowedOrigins("*");
     }
 }

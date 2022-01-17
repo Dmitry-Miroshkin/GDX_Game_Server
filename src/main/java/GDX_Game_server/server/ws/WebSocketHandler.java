@@ -18,7 +18,9 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        sessions.add(session);
+        synchronized (sessions){
+            sessions.add(session);
+        }
         connectListener.handle(session);
     }
 
@@ -29,7 +31,9 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        sessions.removeValue(session, true);
+        synchronized (sessions){
+            sessions.removeValue(session, true);
+        }
         disconnectListener.handle(session);
     }
 
